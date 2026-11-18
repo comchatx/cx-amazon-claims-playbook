@@ -1,0 +1,82 @@
+[
+  {
+    "query": "find orders where the customer was refunded but the item never came back to Amazon",
+    "should_trigger": true
+  },
+  {
+    "query": "退款了但是买家一直没退货，亚马逊多久会赔我",
+    "should_trigger": true
+  },
+  {
+    "query": "the FBA returns report says SWITCHEROO, does that mean the buyer swapped the item",
+    "should_trigger": true
+  },
+  {
+    "query": "the buyer returned an empty box, how do I get reimbursed",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon sent a replacement and the original was never returned, am I owed anything",
+    "should_trigger": true
+  },
+  {
+    "query": "customer damaged return, will Amazon reimburse me for it",
+    "should_trigger": true
+  },
+  {
+    "query": "what's the window for a customer return claim in the UK",
+    "should_trigger": true
+  },
+  {
+    "query": "退货报告里 SELLABLE 但其实退回来的是别人的旧货，怎么索赔",
+    "should_trigger": true
+  },
+  {
+    "query": "how long after a refund can I file a reimbursement claim for an unreturned item in the US",
+    "should_trigger": true
+  },
+  {
+    "query": "return-date in the returns report versus the refund date, which one starts the clock",
+    "should_trigger": true
+  },
+  {
+    "query": "how much did refunds cost me last month after fees",
+    "should_trigger": false
+  },
+  {
+    "query": "what's the referral fee refund when a customer returns",
+    "should_trigger": false
+  },
+  {
+    "query": "set up my returns address for seller-fulfilled orders",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon lost 3 units in the warehouse, were they reimbursed",
+    "should_trigger": false
+  },
+  {
+    "query": "my inbound shipment was received short",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon paid $24.78 for a customer return, what's that based on",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I lower my return rate on the mug set",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我写一个回复买家退货的消息",
+    "should_trigger": false
+  },
+  {
+    "query": "my unfulfillable inventory is piling up, should I remove or dispose it",
+    "should_trigger": false
+  },
+  {
+    "query": "how is the returns processing fee calculated for apparel",
+    "should_trigger": false
+  }
+]

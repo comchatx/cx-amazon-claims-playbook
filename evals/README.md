@@ -1,0 +1,80 @@
+# evals
+
+The test cases and trigger queries the six skills are measured with, in the shapes Anthropic's `skill-creator` reads. Nothing here ships: `package.json`'s `files` names `skills`, `prompts` and `README.zh-CN.md` only.
+
+| File | What it holds |
+|---|---|
+| `warehouse-claims.json`, `shipment-claims.json`, `return-claims.json`, `fee-claims.json`, `claim-value.json`, `claim-filing.json` | `skill-creator`'s `evals.json` for each skill: two cases each, the seller's message, the expected result and the assertions a grader checks. One case of each skill is on the UK store: `uk-lost-two-texts`, `uk-removal-lost`, `uk-wrong-item-disposition`, `uk-fee-window-classes`, `uk-reversal` and `uk-window-where`. |
+| `triggers/<skill>.json` | 20 queries per skill, 10 that should load it and 10 near misses that should not (the sibling skills' ground, the stock and finance playbooks' ground, and unrelated seller work), in English and Chinese, for `skill-creator`'s description loop. |
+| `fixture.py` | Writes a synthetic seller's tree: `python3 -I evals/fixture.py <dir>` replaces `<dir>/tenant` and `<dir>/stub-replies` and leaves the rest of `<dir>` as it was; `--summary` after `<dir>` also prints, as JSON, the figures the cases are graded on. Its docstring holds the scenarios, each with its right answer and the research positions (`research/README.md` and the files it indexes) it rests on. Today in it is 2026-11-17, a Tuesday; seller `A1FIXTURESELLER`, brand Kettlewick; the US store `ATVPDKIKX0DER` on origin `https://sellingpartnerapi-na.amazon.com` and the UK store `A1F83G8C2ARO7P` on `https://sellingpartnerapi-eu.amazon.com`; the seller's ASINs are `B0CLAIM001`, `004`, `006`, `008` and `009`, the fulfilment centres `QQA1`, `QQB2` (US) and `QQL1`, `QQL2` (UK). No real seller's data and no Amazon reply is in it: every figure is invented, in the shapes Amazon's models (at `db2936aa`) and *FBA Reports* page document. |
+| `cx` | A stand-in for the box's `cx` for these runs, on bash 3.2 and 5 with `python3`. It never touches the network. `cx raw amazon-sp-api --origin O --method M --path P [--header K=V]... [--query k=v]... [--body FILE\|@FILE\|B] [--output F] [--json]` answers reads from `<dir>/stub-replies/` first, then from the tree's landed replies under `tenant/raw/amazon-sp-api/`. It answers the Reports API, FBA Inventory summaries, Fulfillment Inbound v0, Finances 2024-06-19 `listTransactions`, Orders 2026-01-01 `searchOrders` and `getOrder`, Catalog Items 2022-04-01 `getCatalogItem` and Sellers `getMarketplaceParticipations`; a marketplace outside the origin's region is answered 400. It refuses every change, `out_of_scope` with exit 2: any `PUT`, `PATCH` or `DELETE`, and any `POST` that is not a report request (so no feed, no inbound or removal change). A call that needs a role outside the application's five is answered 403 `Unauthorized`, as Amazon answers it: the Support API (`/support/2025-02-01/...`, `GET` or `POST`), a Data Kiosk query on the Economics dataset, `GET_V2_SELLER_PERFORMANCE_REPORT`, `GET_FLAT_FILE_RETURNS_DATA_BY_RETURN_DATE`, AWD (`/awd/2024-05-09/...`), among others. A Product Fees estimate is answered 404 (no fixture), not refused. `POST /reports/2021-06-30/reports` answers 202 with a `reportId`; `GET /reports/2021-06-30/reports/{reportId}` answers `DONE` with a `reportDocumentId` (or `CANCELLED` for a type the fixture holds no rows for, as Amazon cancels a report with no data); `GET /reports/2021-06-30/documents/{id}` answers a `url` that is a `file://` path under `<dir>/report-files/`, beside the tree and outside `stub-replies/`, as the box hands a run its own download, tab-separated, with `compressionAlgorithm: GZIP` for the ledger pair, cut from `stub-replies/report-sources/` to the ask's dates. The ledger detail reaches back 18 months and refuses `"eventType": ""`; the removed adjustment, receipt and reconciliation types are answered 400; the replacements report is answered 400 outside North America. Each call is appended to `<dir>/cx-calls.log`: the command, the body it sent, and its answer (`-> HTTP <status> <file>`, or `-> refused out_of_scope: <why>` for a refused change). |
+
+## The tree
+
+`tenant/` is what the box holds after earlier sessions:
+
+- `notes/costs.md`: each SKU's landed cost and whether the seller entered it in Manage Your Sourcing Cost (the black kettle in both stores, and the scale from 2026-06-02; the rest not).
+- `notes/packaging.md`: the infuser's and the UK mug set's packaging as the seller measured it.
+- `notes/claims.md`: the UK case the seller opened for two mug sets in June, and what arrived of removal `KWUKRMV0921`.
+- `notes/invoices.md`: the two supplier invoices by number; their files are not on the box.
+- `raw/amazon-sp-api/getShipments-ATVPDKIKX0DER-2026-10-01.json`: an earlier read, when `FBA18KWINF1` was still `RECEIVING`.
+- `raw/amazon-sp-api/reports/GET_FBA_ESTIMATED_FBA_FEES_TXT_DATA/ATVPDKIKX0DER_2026-08-12_2026-08-15/`: the Fee Preview as read on 2026-08-15, before the infuser's measurement changed, as `report.tsv` with a `receipt.json`.
+- `raw/amazon-sp-api/reports/GET_FBA_REIMBURSEMENTS_DATA/ATVPDKIKX0DER_2025-01-01_2026-06-30/`: the US Reimbursements report as read on 2026-06-30.
+
+`stub-replies/` is what Amazon answers today: inventory summaries for both stores, marketplace participations, the US inbound shipments (v0) and their items, the finance transactions of both stores, the orders, catalog items with package dimensions, and the report sources: the ledger detail and summary, reimbursements, FBA returns, replacements (US), removal order and shipment detail, inbound performance (US), Fee Preview and storage fees.
+
+## The scenarios
+
+| Skill | Cases | Where the answer is |
+|---|---|---|
+| warehouse-claims | us-lost-unpaid; uk-lost-two-texts (UK) | the ledger detail's Adjustments (M, E, P, F, N rows with `Reference ID` and reconciled and unreconciled quantity) against `GET_FBA_REIMBURSEMENTS_DATA` (blank and filled `case-id`) and `researchingQuantity`; for the UK the same reads through the EU origin, `notes/claims.md`, and Amazon's two UK statements on automation |
+| shipment-claims | inbound-short-closed-vs-receiving; uk-removal-lost (UK) | v0 `getShipments` and `getShipmentItemsByShipmentId`, the ledger's `Receipts`, the Inbound Performance report; the UK Removal Order Detail and Removal Shipment Detail (carrier, tracking, no shipment id) and `notes/claims.md` |
+| return-claims | refunded-not-returned; uk-wrong-item-disposition (UK) | Finances `listTransactions` refunds against the FBA Returns, replacements and Reimbursements reports; the UK FBA Returns report (`detailed-disposition`, `reason`, `status`, `license-plate-number`) |
+| fee-claims | mis-tier; uk-fee-window-classes (UK) | the US Fee Preview against the tree's earlier copy and the storage fee report's monthly rows, `listTransactions` fee lines, `notes/packaging.md`; the UK Removal Order Detail and `listTransactions` charge dates, the UK Fee Preview |
+| claim-value | under-valued-after-mysc; uk-reversal (UK) | the US Reimbursements report's `amount-per-unit` by `approval-date` against `notes/costs.md`; the UK reversal row's `original-reimbursement-id` and the UK ledger's M and F rows |
+| claim-filing | file-it-for-me; uk-window-where (UK) | the open items the other reads find, the Support API answered 403, `notes/invoices.md`; the UK refund in `listTransactions` and the absence of a return or reimbursement |
+
+Every case carries four expectations: no window, cap or fee value is quoted from memory as the store's where it is read at run time (a value is read in the run or attributed to the dated Amazon post or page, with its store); no figure is invented; the answer does not decide for the seller whether a claim is worth filing; and cx does not claim it can file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement. `uk-lost-two-texts` expects both Amazon UK statements on warehouse-lost reimbursement (automatic from 2025-01-15 per the UK News post of 2024-10-10; manual, "disabled since August 2022", per the UK staff post of 2026-04-06) stated without picking one.
+
+Values the research gives no value set or format for, and so are this fixture's guesses:
+
+- the Reimbursements report's `condition` value (`New`), its `approval-date` format (ISO 8601 with offset), the sign of a reversal row's `amount-total` and quantities (negative) and of its `amount-per-unit` (positive);
+- the FBA Returns report's `return-date` format, the `detailed-disposition` spelling with an underscore (`CUSTOMER_DAMAGED`; Amazon's page as the listing pack read it spells it with a space, RT35) and the `status` text `Unit returned to inventory` (from third-party copies, RT36);
+- the replacements report's `replacement-reason-code` value (`5`; the code labels are held, RT21) and its `shipment-date` format;
+- the removal reports' `order-source` (`Seller-initiated Manual Removal`), date formats and carrier names; `order-type` (`Return`, `Disposal`), `order-status` (`Completed`, `Cancelled`) and `disposition` (`Sellable`, `Unsellable`) are from the practitioners' sets, Amazon publishing none (RM21);
+- the Inbound Performance report's `problem-type` (`Unit quantity discrepancy`, `Unlabeled`), `coaching-level`, `problem-level`, `alert-status` and `fee-type` values and its date format;
+- the Fee Preview's column order (the all-store list, then the store's own columns), its `product-size-tier` strings (`Small Standard-Size`, `Large Standard-Size`), the UK `product-size-weight-band` strings (`Standard Parcel 5`, also in the storage report's `product_size_tier`) and the `fulfilled-by` values; the unit strings of both reports (`inches`, `centimeters`, `pounds`, `kilograms`, `cubic feet`, `cubic meters`) and the storage report's flag values (`N`, `--`);
+- the ledger detail's `Date` format (`MM/DD/YYYY`), the summary's `Date` per period (`MM/YYYY` monthly, the week's Monday as `MM/DD/YYYY` weekly), the P row's disposition (`WAREHOUSE_DAMAGED`), the sign and blank of `Reconciled Quantity` and `Unreconciled Quantity`, and the `Reference ID` forms; which report documents are gzipped;
+- Finances 2024-06-19 `transactionType` values beyond `Shipment` (`Refund`, `FBAInventoryReimbursement`, `Adjustment`, `ServiceFee`), the `description` texts (`LOST_WAREHOUSE`, `CUSTOMER_RETURN`, `REVERSAL_REIMBURSEMENT`, `RemovalComplete`, `FBA storage fee`), every `breakdownType` name and its nesting (the model's `breakdownType` is a free string whose examples are `Sales`, `Product Charges`, `Expenses`, `FBA fees`, finance pack P-tool-28; `ProductCharges`, `OurPricePrincipal`, `AmazonFees`, `Commission`, `FBAPerUnitFulfillmentFee` and `FBAInventoryReimbursement` are names the finance pack saw in payloads, set here at the top level as the finance pack's fixture sets them; `FBARemovalFee` and `FBAStorageFee` are this fixture's own), and the `itemRelatedIdentifiers` set on reimbursement and removal-fee items (`TRANSACTION_ID` carrying the reimbursement ID, `REMOVAL_SHIPMENT_ITEM_ID` carrying the removal order ID); the "Fee Adjustment - Weight and Dimension Change" description is Amazon's staff wording (FE13), its encoding in `listTransactions` unseen;
+- `getInventorySummaries` `stores` entries (`Amazon.com`, `Amazon.co.uk`; the model says only "seller-enrolled stores");
+- the UK reimbursement amounts at Amazon's estimate and every fee and rate, all invented.
+
+## A run
+
+Each run gets its own copy of the tree, written fresh by `fixture.py` into its own `<run>/`, and is told the same way in every configuration: the seller's message; that `<run>/tenant` is the box's `/tenant`; to `export PATH=<dir of this cx>:$PATH TENANT_TREE=<run>/tenant` before any `cx` call, with `cx`'s flags; seller `A1FIXTURESELLER`, stores `ATVPDKIKX0DER` on `https://sellingpartnerapi-na.amazon.com` and `A1F83G8C2ARO7P` on `https://sellingpartnerapi-eu.amazon.com`; today 2026-11-17, no internet; not to read `<run>/stub-replies/` or this directory; to save the reply as `outputs/answer.md` and the shell commands it ran as `outputs/commands.txt`. A with-skill run is also given the skill's directory and the amazon-sp-api skill with its `references/door.md`; a baseline run is given only the amazon-sp-api skill. Every agent started for a run is told, by name, the two closed routes (the help hub's content call, `…/help/hub/mons-api/…`; a browser read of Amazon help pages) and that no call goes to an Amazon host beyond a plain GET of a public page; with no internet in the run, none is made.
+
+A grader reads `skill-creator`'s `agents/grader.md` and checks each assertion against `answer.md`, `commands.txt`, `<run>/cx-calls.log` and `diff -r` of the run's tree against a fresh one. The only differences a run can leave are replies `cx` landed under `tenant/raw/` and files the run wrote itself; nothing reaches Amazon, and an attempted change shows in `cx-calls.log` and as a refusal in `commands.txt`.
+
+## Rerunning
+
+With `skill-creator` installed in Claude Code, its `scripts/aggregate_benchmark.py` builds the benchmark, `eval-viewer/generate_review.py --static <file>` writes the viewer, and `scripts/run_loop.py --report none` runs the description loop. `run_eval.py` writes a temporary command file under the nearest `.claude/` above its working directory, so it is run from a scratch directory that has its own `.claude/`. `python3 -I evals/fixture.py <dir> --summary` reprints the graded figures after any change to the fixture; the tree it writes is the same on every run.
+
+## What was measured
+
+One run per case and configuration, in Claude Code (Opus 5.5), on 2026-11-17, each graded by a `skill-creator` grader against the case's expectations. A baseline run had only the `cx-sources` and `amazon-sp-api` skills, since nothing in this package's ground is reachable without the door. Half the cases are on the UK store.
+
+| Skill | With the skills | Baseline |
+|---|---|---|
+| warehouse-claims | 20 of 21 | 14 of 21 |
+| shipment-claims | 17 of 18 | 6 of 18 |
+| return-claims | 15 of 19 | 12 of 19 |
+| fee-claims | 18 of 19 | 15 of 19 |
+| claim-value | 15 of 17 | 12 of 17 |
+| claim-filing | 16 of 18 | 13 of 18 |
+| All twelve cases | 101 of 112, 90.2% | 72 of 112, 64.3% |
+
+Both configurations read Amazon's reports equally well once they could reach them; the gap is in what the store's data does not hold: which removal units never arrived and that the removal report carries no shipment id, that a shipment's CLOSED status is when an inbound claim opens, that an N ledger row is a reimbursement's unit and not a find, the UK's two texts on automatic reimbursement, and where a store's window is read. Seven of the eleven misses with the skills are one habit: the answer tells the seller which claim is worth filing or to file now, although every case expects the choice left to the seller and `claim-filing` states it is the seller's; baselines did the same on 8 of the 12 cases, so it is the model's habit, not a line of the skills. The others: no run named the Support API and its restricted role as the reason cx cannot file (`file-it-for-me`), the UK wrong-item answer sent the seller to a claim before the removal the claim rests on and stated a valuation basis without its store and date, a CLOSED shipment was not said to also close on a timeout, and a reversal's amount was not said to follow no published rule.
+
+A first round on the same day is not counted: the stand-in then put report documents under `stub-replies/`, which the runs were told not to read, so 10 of 24 runs never saw a report. The stand-in now writes them beside the tree, and every run was told the same way that a document's `file://` url is the box's own download. `mis-tier` meets Amazon's empty `listTransactions` reply for a span over 180 days (the finance pack's P-rec-16) on purpose. A single run per configuration leaves per-case figures noisy.
+
+The trigger queries in `triggers/` were not run through `skill-creator`'s description loop; the descriptions stay as written, each under pi's 1024 characters.

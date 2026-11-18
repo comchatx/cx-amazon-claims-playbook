@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Amazon paid me $6.10 for a lost unit that cost me $7.90, was it under-valued",
+    "should_trigger": true
+  },
+  {
+    "query": "亚马逊赔偿的单价比我的成本低，是按什么算的",
+    "should_trigger": true
+  },
+  {
+    "query": "I entered my cost in Manage Your Sourcing Cost, why are older reimbursements still at the low price",
+    "should_trigger": true
+  },
+  {
+    "query": "what's the per-unit cap on an FBA reimbursement in the UK",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon reversed a reimbursement and took back £23.20, did my units come back",
+    "should_trigger": true
+  },
+  {
+    "query": "reimbursement reversal with original-reimbursement-id, how do I check it against the ledger",
+    "should_trigger": true
+  },
+  {
+    "query": "how do I dispute the value of a reimbursement and by when",
+    "should_trigger": true
+  },
+  {
+    "query": "赔偿被撤回了，库存账本里只找回了一件，怎么回事",
+    "should_trigger": true
+  },
+  {
+    "query": "since March 2025 Amazon pays sourcing cost, what does that mean for my lost units",
+    "should_trigger": true
+  },
+  {
+    "query": "some reimbursements are in inventory not cash, what are those worth",
+    "should_trigger": true
+  },
+  {
+    "query": "how do I book a reimbursement in my P&L",
+    "should_trigger": false
+  },
+  {
+    "query": "which of my lost warehouse units are still unpaid",
+    "should_trigger": false
+  },
+  {
+    "query": "the customer never returned the item after the refund, can I claim",
+    "should_trigger": false
+  },
+  {
+    "query": "my FBA fee is charged on the wrong size",
+    "should_trigger": false
+  },
+  {
+    "query": "what's my total profit on the kettle after fees and refunds",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我对一下这个月的结算报告",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I find the landed cost of each SKU from my supplier invoices",
+    "should_trigger": false
+  },
+  {
+    "query": "my inbound shipment is CLOSED with a shortage",
+    "should_trigger": false
+  },
+  {
+    "query": "what's my cost of goods sold on the kettle for Q3",
+    "should_trigger": false
+  },
+  {
+    "query": "how much will Amazon charge me to store the infusers in December",
+    "should_trigger": false
+  }
+]

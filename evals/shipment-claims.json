@@ -1,0 +1,41 @@
+{
+  "skill_name": "shipment-claims",
+  "evals": [
+    {
+      "id": 21,
+      "name": "inbound-short-closed-vs-receiving",
+      "prompt": "Two of my inbound shipments came up short: FBA18KWINF1 (infusers) and FBA19KWSCL2 (scales). Which one can I claim right now, how many units are missing on each, and by when do I have to claim?",
+      "expected_output": "v0 getShipments: FBA18KWINF1 is CLOSED, FBA19KWSCL2 is RECEIVING. getShipmentItemsByShipmentId: FBA18KWINF1 480 shipped, 462 received (18 short; ledger Receipts 300 on 08-26 and 162 on 08-28 at QQB2; the Inbound Performance report has carton FBA18KWINF1U000004 at 40 expected, 22 received); FBA19KWSCL2 600 shipped, 570 received so far (ledger 400 on 11-09, 170 on 11-11). No Lost_Inbound reimbursement for either. Amazon files a missing-units request after the shipment is CLOSED (IN7), so FBA19KWSCL2's 30 are not yet a claim; CLOSED is all units received or a timeout, not proof (IN14). The window counts from the verified delivery to the FC; no operation returns that date or the eligibility date (IN10, IN29), so cx cannot give the deadline: the length is read on the US staff post and gs.amazon.cn pages (IN7) and the date on the shipment's page in Seller Central. The earlier landed getShipments of 2026-10-01 showed FBA18KWINF1 RECEIVING: status is read today. Route: the shipment's Reconcile/Contents tab, 'Research missing units' (FL4, IN13); one claim per shipment (FL7, IN17); evidence: proof of ownership and proof of delivery, non-editable formats (IN15, IN16, FL24).",
+      "files": [],
+      "expectations": [
+        "The answer reads both shipments' status today through v0 getShipments and says FBA18KWINF1 is CLOSED and FBA19KWSCL2 is RECEIVING.",
+        "The answer gives the counts from a read that carries them: FBA18KWINF1 480 shipped, 462 received (18 short) and FBA19KWSCL2 600 shipped, 570 received so far (30 not yet received), from v0 getShipmentItemsByShipmentId or the ledger's Receipts rows.",
+        "The answer says a missing-units request is filed after the shipment is CLOSED, so FBA19KWSCL2 is not yet claimable, and that CLOSED alone does not prove every unit arrived.",
+        "The answer says the window counts from the verified delivery date and that no API read returns that date or the shipment's eligibility date, so the deadline itself is read by the seller on the shipment in Seller Central; any length given is attributed to Amazon's dated US post or page.",
+        "The answer names the seller's route (the shipment's Contents or Reconcile tab, research missing units) and the evidence Amazon asks for (proof of ownership such as an invoice, and proof of delivery), and says one claim is allowed per shipment.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    },
+    {
+      "id": 22,
+      "name": "uk-removal-lost",
+      "prompt": "UK store. In September I made removal order KWUKRMV0921 to get 60 infusers back to my warehouse. Only 40 arrived. One box never showed up. Can you claim this for me? What does Amazon need from me?",
+      "expected_output": "Removal Order Detail (UK, EU origin): KWUKRMV0921, requested 2026-09-21, Return, Completed, 60 requested, 60 shipped, removal-fee 31.80 GBP. Removal Shipment Detail: two parcels shipped 2026-09-25, DPD 15501234567890 with 40 units and Evri H01KWF0000012345 with 20 units; the report has no shipment id column (RM15). notes/claims.md: the DPD parcel of 40 arrived 2026-09-30, nothing else. So 20 units on the Evri tracking number are the missing parcel. Removal claims are all filed by hand (RM2); cx cannot open one (RM35, SU12). The seller's route is 'Resolve a removal order issue' by removal order ID (RM4, FL4); Amazon's list asks for the removal order ID, the shipment ID with tracking or proof of delivery, ASINs/FNSKUs and quantities, and images (RM14); the shipment ID is read by the seller in Seller Central, since no report carries it (RM15). A lost-in-transit removal claim has an earliest and a latest filing day counted from the order's creation (RM6, RM9); the UK lengths are the UK News post's, read there; 57 days since creation today. A repeat read of the shipment report can return different rows (SU25).",
+      "files": [],
+      "expectations": [
+        "The answer reads the UK Removal Order Detail and Removal Shipment Detail reports through the EU origin in this run.",
+        "The answer gives 60 requested and 60 shipped, and the two parcels: DPD 15501234567890 with 40 units and Evri H01KWF0000012345 with 20 units, shipped 2026-09-25, and ties the 20 missing units to the Evri tracking number (using notes/claims.md for the 40 that arrived).",
+        "The answer says the removal shipment report carries no shipment ID, which Amazon's removal claim asks for, so the seller reads it in Seller Central.",
+        "The answer says removal claims are filed by the seller (not paid automatically) and names the route ('Resolve a removal order issue', by removal order ID) and the evidence list (order ID, shipment ID with tracking or proof of delivery, FNSKU and quantities, images).",
+        "The answer states that a lost-in-transit removal claim has an earliest and a latest day counted from the removal order's creation (2026-09-21, 57 days ago), and either attributes the UK lengths to the dated UK News post or says where they are read.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    }
+  ]
+}

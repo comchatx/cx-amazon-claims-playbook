@@ -1,23 +1,14 @@
-REPLACE: README.md in Chinese, in the same order.
+cx 读你的亚马逊报告，核对亚马逊可能该赔你的货和钱：仓库里丢失或损坏的货、入库少收、移除后没送回、退款后没退回，以及多收的费用和赔少了的赔偿。每一项都说明亚马逊赔过没有、索赔期限写在哪。索赔由你在卖家后台提交，cx 不能开案件，也不能上传证据。
 
 你可以这样问：
 
-- REPLACE
-- REPLACE
-- REPLACE
+- 上个月的移除订单，货都送回来了吗？
+- 仓库里丢的货，亚马逊会自己赔吗？
+- 索赔提得多，会不会影响店铺？
 
-## 连接店铺
+如果想深入看库存状态和资金明细，再装上[亚马逊库存分析手册](https://www.npmjs.com/package/@comchatx/cx-amazon-stock-playbook)和[亚马逊财务分析手册](https://www.npmjs.com/package/@comchatx/cx-amazon-finance-playbook)。
 
-REPLACE
+## 用到的数据
 
-## 任务何时运行
-
-REPLACE
-
-## 费用
-
-REPLACE
-
-## 需要
-
-REPLACE
+- **Amazon SP-API**：你的亚马逊卖家账户，在 Amazon SP-API 插件里连接。cx 在这里读取库存流水、赔偿、退货、移除、货件和费用。
+- **Amazon Seller Profile**：告诉 cx 你在亚马逊开店。

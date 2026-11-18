@@ -1,15 +1,86 @@
 {
-  "name": "@comchatx/cx-replace-me",
+  "name": "@comchatx/cx-amazon-claims-playbook",
   "version": "0.1.0",
-  "description": "REPLACE: the card's line in English, written by the copy page the guide names.",
+  "description": "Checks what Amazon may owe you, and says where to claim.",
   "license": "MIT",
   "author": "ComChatX",
-  "homepage": "https://github.com/comchatx/cx-replace-me#readme",
+  "comchatx": {
+    "name": "Amazon Claims Playbook",
+    "nameZh": "亚马逊索赔分析手册",
+    "about": "核对亚马逊可能该赔的货和钱，说明每类去哪索赔。",
+    "mark": {
+      "line": "clipboard"
+    },
+    "section": "extensions",
+    "order": 57,
+    "skills": {
+      "warehouse-claims": {
+        "zh": "查出亚马逊仓库里丢失或损坏、还没赔的货。",
+        "en": "Units lost or damaged in Amazon's warehouses, not yet paid."
+      },
+      "shipment-claims": {
+        "zh": "核对入库少收，以及移除没送到的货。",
+        "en": "Shipments received short, and removals that never came back."
+      },
+      "return-claims": {
+        "zh": "找出退款了却没退回、或退回不对的订单。",
+        "en": "Refunds whose item never came back, or came back wrong."
+      },
+      "fee-claims": {
+        "zh": "查出按错尺寸、重量或类目多收的费用。",
+        "en": "Fees charged on the wrong size, weight or category."
+      },
+      "claim-value": {
+        "zh": "看清赔偿按什么价算，哪些又被撤回。",
+        "en": "What a reimbursement was worth, and when it was taken back."
+      },
+      "claim-filing": {
+        "zh": "说明索赔在哪提交、要什么证据、期限在哪查。",
+        "en": "Where each claim is filed, its evidence, and where its window is stated."
+      }
+    },
+    "prompts": {
+      "claims-audit": {
+        "zh": "查一遍亚马逊可能该赔的货和钱，以及各自去哪索赔。"
+      },
+      "inbound-shortfall": {
+        "zh": "查最近几批入库有没有少收，差多少、要什么证据。"
+      },
+      "returns-check": {
+        "zh": "找出退款了但没退回、或退回不对的订单。"
+      },
+      "fee-check": {
+        "zh": "查 FBA 费用有没有按错尺寸、重量或类目收。"
+      },
+      "reimbursement-value": {
+        "zh": "看亚马逊的赔偿按什么价算、有没有被撤回的。"
+      }
+    },
+    "builds": [
+      {
+        "on": "cx-amazon-sp-api",
+        "need": "required"
+      },
+      {
+        "on": "cx-amazon-seller",
+        "need": "required"
+      },
+      {
+        "on": "@comchatx/cx-amazon-stock-playbook",
+        "need": "optional"
+      },
+      {
+        "on": "@comchatx/cx-amazon-finance-playbook",
+        "need": "optional"
+      }
+    ]
+  },
+  "homepage": "https://github.com/comchatx/cx-amazon-claims-playbook#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/comchatx/cx-replace-me.git"
+    "url": "git+https://github.com/comchatx/cx-amazon-claims-playbook.git"
   },
-  "bugs": "https://github.com/comchatx/cx-replace-me/issues",
+  "bugs": "https://github.com/comchatx/cx-amazon-claims-playbook/issues",
   "keywords": [
     "pi-package"
   ],
@@ -17,37 +88,22 @@
   "pi": {
     "skills": [
       "./skills"
+    ],
+    "prompts": [
+      "./prompts"
     ]
   },
   "files": [
     "skills",
+    "prompts",
     "README.zh-CN.md"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
-  "comchatx": {
-    "name": "REPLACE: the name the Plugins page prints",
-    "about": "REPLACE: the card's line in Chinese",
-    "mark": {
-      "line": "REPLACE"
-    },
-    "section": "REPLACE",
-    "order": 0,
-    "skills": {
-      "cx-replace-me": {
-        "about": {
-          "en": "REPLACE: what the skill tells cx, in English",
-          "zh": "REPLACE: what the skill tells cx, in Chinese"
-        }
-      }
-    },
-    "builds": [
-      "REPLACE"
-    ]
-  },
   "devDependencies": {
+    "@earendil-works/pi-ai": "1.5.0",
     "@earendil-works/pi-coding-agent": "1.5.0",
     "@types/node": "26.2.0",
     "typescript": "7.0.2",

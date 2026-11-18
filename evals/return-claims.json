@@ -1,0 +1,42 @@
+{
+  "skill_name": "return-claims",
+  "evals": [
+    {
+      "id": 31,
+      "name": "refunded-not-returned",
+      "prompt": "Can you find US orders from the last few months where the customer got refunded or a replacement but the item never came back to Amazon? Am I owed anything yet?",
+      "expected_output": "Refund lines (listTransactions) set against the FBA Returns report, the replacements report and the Reimbursements report: 113-4000001-0000001 refunded 07-02, returned 07-15 SELLABLE: nothing owed. 113-4000002-0000002 refunded 07-20, not returned, reimbursed 09-22 (2481000152, CustomerReturn, 24.78, no case-id). 113-4000003-0000003 (frother) refunded 08-10, not returned, not reimbursed: 99 days since the refund. 113-4000004-0000004 refunded 10-01, not returned, not reimbursed: 47 days. 113-4000005-0000005 refunded 08-20, returned 09-03 CUSTOMER_DAMAGED: not reimbursed by policy (RT3); a grading dispute is a removal claim (RT13). 113-4000006-0000006 was replaced by 113-4000006-0000106 shipped 08-01 (replacements report), original not returned, not reimbursed: 108 days. The clock counts from the refund or replacement (RT4); the US window is stated two ways by Amazon (the US News post of 2024-07-24 and a staff post of 2026-08-13), read there (RT5, RT6); return-date is processing at the FC (RT33); a refund with no return never shows in the returns report (RT32). Route: by order ID on the policy page's status tool, or the IDR portal (FL4, FL5); value on the order basis (VR27, VR31).",
+      "files": [],
+      "expectations": [
+        "The answer reads refunds from Finances listTransactions (or Orders) and sets them against the FBA Returns report and the Reimbursements report in this run; it also reads the replacements report or the replacement order's link to 113-4000006-0000006.",
+        "The answer names 113-4000003-0000003 (refunded 2026-08-10, not returned, not reimbursed) and 113-4000006-0000006 (replaced 2026-08-01, original not returned, not reimbursed) as the candidates.",
+        "The answer says 113-4000002-0000002 was already reimbursed (2481000152, 24.78, no case-id) and 113-4000001-0000001 came back sellable.",
+        "The answer says 113-4000005-0000005 came back CUSTOMER_DAMAGED, which Amazon does not reimburse on a customer return, and that contesting the grade goes through a removal.",
+        "The answer sets 113-4000004-0000004 (refunded 2026-10-01, 47 days ago) apart from the two older candidates: it states Amazon's rule that a unit not returned within the store's set number of days of the refund is in most cases reimbursed, and either compares the 47 days with a day count attributed to Amazon's dated US post or says where the seller reads that count; it does not call the order owed on a count of its own.",
+        "The answer counts the clock from the refund or replacement date, not from the returns report's return-date.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    },
+    {
+      "id": 32,
+      "name": "uk-wrong-item-disposition",
+      "prompt": "英国站：订单 203-5000011-0000011 的买家退回来的根本不是我的水壶，是别的牌子的旧水壶。退货报告里是怎么写的？亚马逊会赔我吗？还有 203-5000012-0000012 那单杯子也退了，说是坏的。",
+      "expected_output": "FBA Returns report (UK, EU origin): 203-5000011-0000011, KW-KETTLE-BLK-UK, return-date 2026-10-14, detailed-disposition SELLABLE, reason SWITCHEROO, status 'Unit returned to inventory', LPN LPNRK0011UK1, comment 'Not the kettle I ordered'; refunded 2026-10-06. SWITCHEROO is the buyer's reason ('Amazon sent me the wrong item'), not Amazon's finding that the buyer swapped the unit (RT18); the unit was graded sellable and put back into the seller's stock, and grading follows the unit's condition at the FC (RT2). For a wrong item the unit is the evidence and the claim follows its removal (RT16); the LPN ties the removed unit to this row (RT37); the removal claim kind is 'different' units received, with Amazon's evidence list (RM3, RM14). 203-5000012-0000012, KW-MUG-SET4-UK, 2026-10-29, CUSTOMER_DAMAGED, reason DEFECTIVE, LPN LPNRK0012UK8: customer-damaged units are not reimbursed (RT3); contesting the grade needs the unit back through a removal (RT13, RM11). Disposition spellings vary by source (RT35). The UK windows are read on the UK News post and the store's removals page (RT4, RM12). Answered in Chinese.",
+      "files": [],
+      "expectations": [
+        "The answer reads the UK store's FBA Returns report through the EU origin and gives, for 203-5000011-0000011, disposition SELLABLE, reason SWITCHEROO, status 'Unit returned to inventory' and LPN LPNRK0011UK1.",
+        "The answer says SWITCHEROO is the buyer's stated reason (that Amazon sent the wrong item), not Amazon's finding that the buyer returned a different unit.",
+        "The answer says that to dispute a wrong item the seller removes the unit (it was put back as sellable) and claims on what arrives, with the LPN and images as evidence, as the seller's step in Seller Central.",
+        "The answer gives 203-5000012-0000012 as CUSTOMER_DAMAGED (reason DEFECTIVE, LPN LPNRK0012UK8), says customer-damaged returns are not reimbursed, and that contesting the grade needs the unit returned through a removal.",
+        "The answer is written in Chinese.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    }
+  ]
+}
