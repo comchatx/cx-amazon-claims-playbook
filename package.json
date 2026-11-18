@@ -43,16 +43,16 @@
       "claims-audit": {
         "zh": "查一遍亚马逊可能该赔的货和钱，以及各自去哪索赔。"
       },
-      "inbound-shortfall": {
+      "shipment-claims": {
         "zh": "查最近几批入库有没有少收，差多少、要什么证据。"
       },
-      "returns-check": {
+      "return-claims": {
         "zh": "找出退款了但没退回、或退回不对的订单。"
       },
-      "fee-check": {
+      "fee-claims": {
         "zh": "查 FBA 费用有没有按错尺寸、重量或类目收。"
       },
-      "reimbursement-value": {
+      "claim-value": {
         "zh": "看亚马逊的赔偿按什么价算、有没有被撤回的。"
       }
     },

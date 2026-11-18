@@ -12,10 +12,10 @@ export const SKILL_WORDS = {
 } as const;
 export const PROMPT_WORDS = {
   "claims-audit": { zh: "查一遍亚马逊可能该赔的货和钱，以及各自去哪索赔。", en: "Find what Amazon may owe you, and where each claim is filed.", body: "Find what Amazon may owe me: units lost, damaged or received short, removals that never came back, refunds whose item was never returned, and fees charged wrongly. For each, say what it rests on in my own reports, whether Amazon already paid it, and where the window for my store is stated." },
-  "inbound-shortfall": { zh: "查最近几批入库有没有少收，差多少、要什么证据。", en: "Check your recent shipments to Amazon for units received short.", body: "Check my recent shipments to Amazon for units received short: how many on which shipments, whether each can be claimed yet, and what Amazon asks to see." },
-  "returns-check": { zh: "找出退款了但没退回、或退回不对的订单。", en: "Find refunds whose item never came back, or came back wrong.", body: "Find refunds where the item never came back to Amazon, or came back as something else or damaged by Amazon, and whether Amazon has already paid for each." },
-  "fee-check": { zh: "查 FBA 费用有没有按错尺寸、重量或类目收。", en: "Check whether your Amazon fees were charged on the wrong size or category.", body: "Check whether Amazon charged my fees on the wrong size, weight or category: which products, since when, and which charges can still be disputed for my store." },
-  "reimbursement-value": { zh: "看亚马逊的赔偿按什么价算、有没有被撤回的。", en: "See what Amazon's reimbursements were worth, and which were taken back.", body: "Look at what Amazon has reimbursed me: what each payment was valued at, which look low against my own cost, and which were later taken back." },
+  "shipment-claims": { zh: "查最近几批入库有没有少收，差多少、要什么证据。", en: "Check your recent shipments to Amazon for units received short.", body: "Check my recent shipments to Amazon for units received short: how many on which shipments, whether each can be claimed yet, and what Amazon asks to see." },
+  "return-claims": { zh: "找出退款了但没退回、或退回不对的订单。", en: "Find refunds whose item never came back, or came back wrong.", body: "Find refunds where the item never came back to Amazon, or came back as something else or damaged by Amazon, and whether Amazon has already paid for each." },
+  "fee-claims": { zh: "查 FBA 费用有没有按错尺寸、重量或类目收。", en: "Check whether your Amazon fees were charged on the wrong size or category.", body: "Check whether Amazon charged my fees on the wrong size, weight or category: which products, since when, and which charges can still be disputed for my store." },
+  "claim-value": { zh: "看亚马逊的赔偿按什么价算、有没有被撤回的。", en: "See what Amazon's reimbursements were worth, and which were taken back.", body: "Look at what Amazon has reimbursed me: what each payment was valued at, which look low against my own cost, and which were later taken back." },
 } as const;
 /** The Overview, each README whole. */
 export const OVERVIEW = {
