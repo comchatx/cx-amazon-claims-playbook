@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.2
 
 - Four templates are named for the skill each asks: `/shipment-claims`, `/return-claims`, `/fee-claims` and `/claim-value`; `/claims-audit` asks all six.
 - The `claim-filing` and `claim-value` skills' English lines carry no Chinese or Japanese characters, so the Plugins page lists all six skills.
