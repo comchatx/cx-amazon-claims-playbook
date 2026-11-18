@@ -18,7 +18,7 @@ Every line of the skills ends with the position it rests on, such as `(FC9)` or 
 | `skills/fee-claims` | A fee charged on a basis Amazon's own rule did not support, in fifteen kinds. Covers the two fee windows as rules, remeasurement and the EU certification regime. | FE |
 | `skills/claim-value` | What a reimbursement is worth and when it is taken back: sourcing cost, Manage Your Sourcing Cost, the dispute, the cap by store, under-valued lines, reversals, Japan, currency and Chinese cost proofs. | VR |
 | `skills/claim-filing` | Where each kind is filed and with what evidence, limits, conduct and the automated-agent duties. Also every claims read with its role (`references/reads.md`), the steps no operation can do (`references/no-door.md`), where each window is stated, and the recovery market with the seller's choices. | FL, SU, EC |
-| `prompts/*.md` | `/claims-audit`, `/inbound-shortfall`, `/returns-check`, `/fee-check` and `/reimbursement-value`. Each hands the seller's words to cx. | |
+| `prompts/*.md` | `/claims-audit`, `/shipment-claims`, `/return-claims`, `/fee-claims` and `/claim-value`. Each hands the seller's words to cx. | |
 
 How a call is made, and how a report is asked for and landed, is the `amazon-sp-api` skill's (`references/door.md`), never this package's.
 

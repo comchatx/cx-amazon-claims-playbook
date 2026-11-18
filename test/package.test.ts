@@ -29,9 +29,12 @@ it("the pinned pi lists the package's skills as its manifest names them, with no
   const prompts = loader.getPrompts();
   expect(prompts.diagnostics).toEqual([]);
   expect(prompts.prompts.map((prompt) => prompt.name).sort()).toEqual(Object.keys(manifest.comchatx.prompts).sort());
-  // The Plugins page names a package's skills from its `comchatx` field alone.
   expect(skills.map((skill) => skill.name).sort()).toEqual(Object.keys(manifest.comchatx.skills).sort());
   for (const skill of skills) expect(skill.description.trim(), skill.name).not.toBe("");
+  // The Plugins page lists a skill by what pi lists, its description as the English line, and drops a skill whose English line holds a Chinese character.
+  for (const skill of skills) expect(skill.description, skill.name).not.toMatch(/[一-鿿]/);
+  // A seller types one set of names: each template that asks one skill is named for it, and /claims-audit asks them all.
+  expect(prompts.prompts.map((prompt) => prompt.name).filter((name) => name !== "claims-audit" && !skills.some((skill) => skill.name === name))).toEqual([]);
 });
 
 it("ships its skills, its templates, its README in English and in Chinese and its license, and nothing else", () => {
