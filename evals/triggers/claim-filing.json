@@ -1,0 +1,82 @@
+[
+  {
+    "query": "file all my open FBA reimbursement claims for me",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我直接在后台提交索赔，并把发票附上",
+    "should_trigger": true
+  },
+  {
+    "query": "where in Seller Central do I open a lost inventory claim",
+    "should_trigger": true
+  },
+  {
+    "query": "what evidence does Amazon accept for a reimbursement claim, can I send a pro forma invoice",
+    "should_trigger": true
+  },
+  {
+    "query": "can the SP-API open a support case or read my case status",
+    "should_trigger": true
+  },
+  {
+    "query": "what's the window for each kind of FBA claim in my store and where do I check it",
+    "should_trigger": true
+  },
+  {
+    "query": "how many claims can I file at once without getting my account flagged",
+    "should_trigger": true
+  },
+  {
+    "query": "my case is Pending Merchant Action, what do I do",
+    "should_trigger": true
+  },
+  {
+    "query": "UK customer refunded on 2 September, what's my exact deadline to claim",
+    "should_trigger": true
+  },
+  {
+    "query": "can a third-party reimbursement service file claims on my account",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon lost 4 kettles, were they reimbursed",
+    "should_trigger": false
+  },
+  {
+    "query": "how much did Amazon owe me last year in reimbursements",
+    "should_trigger": false
+  },
+  {
+    "query": "my inbound shipment FBA18KWINF1 is 18 units short",
+    "should_trigger": false
+  },
+  {
+    "query": "what dimensions does Amazon have for my infuser",
+    "should_trigger": false
+  },
+  {
+    "query": "the buyer returned a different kettle",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I contact Seller Support about my listing being suppressed",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我分析一下广告花费",
+    "should_trigger": false
+  },
+  {
+    "query": "set the FBM quantity of my teapot to 60",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon took back a reimbursement, why",
+    "should_trigger": false
+  },
+  {
+    "query": "how much is the A-to-z claim rate on my account",
+    "should_trigger": false
+  }
+]

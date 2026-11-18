@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Amazon is charging my product as large standard but my box is small standard, how do I get a refund",
+    "should_trigger": true
+  },
+  {
+    "query": "FBA 费用按错了尺寸收，我量的包装更小，怎么申请退费",
+    "should_trigger": true
+  },
+  {
+    "query": "how do I request a remeasurement of my product's dimensions",
+    "should_trigger": true
+  },
+  {
+    "query": "how far back can I dispute FBA fulfilment fees charged on the wrong weight",
+    "should_trigger": true
+  },
+  {
+    "query": "I was charged a removal fee on a removal order that was cancelled, can I get it back",
+    "should_trigger": true
+  },
+  {
+    "query": "itemized vs non-itemized FBA fee errors, what's the difference in time limit",
+    "should_trigger": true
+  },
+  {
+    "query": "the referral fee category on my kettle is wrong, it's charged as appliances",
+    "should_trigger": true
+  },
+  {
+    "query": "I got charged a placement fee on a shipment that was never received",
+    "should_trigger": true
+  },
+  {
+    "query": "英国站的尺寸认证以后，之前多收的配送费会自动退吗",
+    "should_trigger": true
+  },
+  {
+    "query": "where do I see the dimensions Amazon has on file for my SKU and when they changed",
+    "should_trigger": true
+  },
+  {
+    "query": "what's the FBA fulfilment fee for a large standard item this year",
+    "should_trigger": false
+  },
+  {
+    "query": "estimate my fees if I price the infuser at 14.99",
+    "should_trigger": false
+  },
+  {
+    "query": "how much storage am I paying per cubic foot this month",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon lost 5 mugs in the warehouse, did they pay",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon reimbursed a lost unit below my cost, is that right",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我算一下这个 SKU 的利润",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I book FBA fees in my accounting software",
+    "should_trigger": false
+  },
+  {
+    "query": "my inbound shipment is short 18 units",
+    "should_trigger": false
+  },
+  {
+    "query": "should I raise my price to cover the new fees",
+    "should_trigger": false
+  },
+  {
+    "query": "what is the low inventory level fee and how do I avoid it",
+    "should_trigger": false
+  }
+]

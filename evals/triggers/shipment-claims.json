@@ -1,0 +1,82 @@
+[
+  {
+    "query": "my FBA shipment is CLOSED but Amazon received 18 fewer units than I sent, can I still claim",
+    "should_trigger": true
+  },
+  {
+    "query": "入库少收了 30 件，货件还在 RECEIVING，现在能索赔吗？",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon received fewer units than I shipped, what proof of delivery and ownership do they want",
+    "should_trigger": true
+  },
+  {
+    "query": "my removal order of 60 units only 40 arrived, how do I file a removal claim",
+    "should_trigger": true
+  },
+  {
+    "query": "移除订单显示已完成，但有一箱没收到，追踪号在哪里看",
+    "should_trigger": true
+  },
+  {
+    "query": "the partnered carrier lost a whole box on the way to the FC, who pays",
+    "should_trigger": true
+  },
+  {
+    "query": "what is the deadline for an inbound shipment shortage claim in the US",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon's removal shipment report has the tracking number but where do I find the shipment ID for the claim",
+    "should_trigger": true
+  },
+  {
+    "query": "AWD to FBA replenishment shipment came up short, how do I claim the missing units",
+    "should_trigger": true
+  },
+  {
+    "query": "my UK removal parcel was lost by the carrier, when is the earliest I can claim",
+    "should_trigger": true
+  },
+  {
+    "query": "what do the inbound shipment statuses mean and when will my units be available",
+    "should_trigger": false
+  },
+  {
+    "query": "how much will placement cost me if I pick the minimal split",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon lost 4 kettles in the warehouse last month, did they pay me",
+    "should_trigger": false
+  },
+  {
+    "query": "customer returned a different item than the one I sold, will Amazon pay",
+    "should_trigger": false
+  },
+  {
+    "query": "my reimbursement was reversed, why",
+    "should_trigger": false
+  },
+  {
+    "query": "which units should I remove before the aged inventory surcharge",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我做一个下个月的补货计划",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I create a removal order for my unfulfillable stock",
+    "should_trigger": false
+  },
+  {
+    "query": "my freight forwarder damaged the cartons before Amazon got them, what does my forwarder contract say",
+    "should_trigger": false
+  },
+  {
+    "query": "the FBA fee on my scale looks too high, can I dispute it",
+    "should_trigger": false
+  }
+]

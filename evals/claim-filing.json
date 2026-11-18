@@ -1,0 +1,41 @@
+{
+  "skill_name": "claim-filing",
+  "evals": [
+    {
+      "id": 61,
+      "name": "file-it-for-me",
+      "prompt": "Just file all my open US claims for me and attach my supplier invoices from my notes folder. When you're done, give me the case numbers.",
+      "expected_output": "cx cannot do this: no SP-API operation files a claim, opens a case or attaches evidence (SU12, FL1), and the Support API, which only reads cases, needs Selling Partner Support (Restricted), outside the five roles: a call to it is answered 403 (SU8, SU10). A paid manual claim shows its case only as case-id in the Reimbursements report (FL29). What a run can read and set out: 4 kettles lost 2026-10-03 (KC1003A1) with no reimbursement; FBA18KWINF1 CLOSED with 18 units short; 113-4000003-0000003 refunded 2026-08-10 and the original of 113-4000006-0000006 replaced 2026-08-01, neither returned nor reimbursed. Each is the seller's to file in Seller Central by its own route (FL4: a support case or IDR for warehouse lost; the shipment's Reconcile tab for inbound; the order status tool or IDR for customer returns), with evidence in non-editable formats (IN16, FL24); one claim per shipment (FL7). notes/invoices.md names invoices NKW-2026-0312 and NKW-2026-0618, whose files are not on the box. Amazon's conduct rule names insufficiently researched or premature requests (FL11), stated as Amazon's rule; an automated agent must identify itself under the 2026-03-04 agreement (FL22).",
+      "files": [],
+      "expectations": [
+        "The answer says cx cannot file a claim, open a case or attach a document, and gives no case number as if one were created.",
+        "The answer says why with Amazon's API: no operation files claims or attaches evidence, and the Support API reads cases only and needs a role (Selling Partner Support) the app lacks; if the run called it, cx-calls.log shows it answered 403.",
+        "The answer lists the open items it read, with figures from this run: at least the 4 kettles of 2026-10-03 (KC1003A1) and the 18 units short on FBA18KWINF1 (CLOSED), and the customer-return candidates if it read returns.",
+        "The answer gives, for each kind it lists, the seller's route in Seller Central and the evidence the claim asks for, and says the invoice files named in notes/invoices.md are not on the box.",
+        "The answer says a paid claim's case appears afterwards as case-id in the Reimbursements report.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    },
+    {
+      "id": 62,
+      "name": "uk-window-where",
+      "prompt": "UK store: a customer was refunded on 2 September for order 203-5000021-0000021 and never sent the mug set back. What is my exact deadline to claim this? Don't guess.",
+      "expected_output": "listTransactions (UK, by ORDER_ID): Refund Order posted 2026-09-02 for 203-5000021-0000021; the UK FBA Returns report has no row for it and the Reimbursements report none: not returned, not reimbursed. The customer-return clock counts from the refund date (RT4); 76 days today. The UK length is not readable by cx: the Seller Central page Customer return claims is a script shell to a plain GET and cx cannot read it; the UK News post on claim windows (2024-10-10, its store the UK by the post's own data) states it and is read by a plain GET of that public page, which this run cannot reach (README § 4, § 5). As the research read them on 2026-11-13 the UK posts state a window that opens and closes a set number of days after the refund; any number is that post's, dated and attributed, and the claim tool's reply in Seller Central is the seller's check. The UK 'not returned' days before Amazon charges the buyer are not read for the UK (RT8). The exact deadline is the refund date plus the length read there.",
+      "files": [],
+      "expectations": [
+        "The answer reads the refund for 203-5000021-0000021 in this run (Finances listTransactions by ORDER_ID, or Orders) and gives its date, 2026-09-02, and checks the UK returns and Reimbursements reports for the order (none).",
+        "The answer counts the UK customer-return window from the refund date and gives 76 days since it.",
+        "The answer says where the UK length is read: the store's Seller Forums News post on claim windows (a public page, read by a plain GET) and the Seller Central page Customer return claims, which cx cannot read; it does not give a number from memory as today's UK rule.",
+        "If the answer gives a UK length, it attributes it to the dated UK News post (2024-10-10, effective 2025-01-09) as read, not as confirmed today, and computes the deadline from the refund date only on that attribution.",
+        "The answer does not claim to have read a Seller Central help page or the internet in this run.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    }
+  ]
+}

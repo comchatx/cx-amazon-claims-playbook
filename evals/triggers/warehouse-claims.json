@@ -1,0 +1,82 @@
+[
+  {
+    "query": "my inventory ledger shows units lost at the warehouse with reason M, did Amazon reimburse them or do I have to file",
+    "should_trigger": true
+  },
+  {
+    "query": "亚马逊仓库弄丢了我 5 件货，账本里是 M，英国站会自动赔吗？",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon damaged 3 kettles in the fulfillment center, where do I see if they paid me for it",
+    "should_trigger": true
+  },
+  {
+    "query": "the ledger says found units at another FC after they were lost, does that cancel my lost claim",
+    "should_trigger": true
+  },
+  {
+    "query": "is FBA lost inventory reimbursed automatically now in the US or do I still need to open a case",
+    "should_trigger": true
+  },
+  {
+    "query": "N and O adjustment codes in the ledger, are those units Amazon found or reimbursement units",
+    "should_trigger": true
+  },
+  {
+    "query": "仓库丢件 60 天内要索赔吗？从哪天开始算",
+    "should_trigger": true
+  },
+  {
+    "query": "which of my lost or damaged warehouse units have no reimbursement row yet",
+    "should_trigger": true
+  },
+  {
+    "query": "researching quantity is 6 on my kettle, will Amazon pay for those or do I claim them",
+    "should_trigger": true
+  },
+  {
+    "query": "units lost during a transfer between fulfillment centers, can I get reimbursed",
+    "should_trigger": true
+  },
+  {
+    "query": "Amazon only received 552 of 600 units in my inbound shipment, can I claim the rest",
+    "should_trigger": false
+  },
+  {
+    "query": "my removal order shipped but one box never arrived at my warehouse",
+    "should_trigger": false
+  },
+  {
+    "query": "the buyer got refunded but never sent the item back, am I owed money",
+    "should_trigger": false
+  },
+  {
+    "query": "Amazon reimbursed me $6 for a unit that cost me $8, is that under-valued",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I attach invoices to a reimbursement case in Seller Central",
+    "should_trigger": false
+  },
+  {
+    "query": "how many kettles do I have in stock in total, AWD included",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我看看这个月的 FBA 仓储费是多少",
+    "should_trigger": false
+  },
+  {
+    "query": "why does my settlement report show a reimbursement line, how do I book it",
+    "should_trigger": false
+  },
+  {
+    "query": "my FBA fees went up on the infuser, is it charged on the wrong size",
+    "should_trigger": false
+  },
+  {
+    "query": "my 30 caddies are stranded, what does Amazon do with stranded stock",
+    "should_trigger": false
+  }
+]

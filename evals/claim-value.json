@@ -1,0 +1,40 @@
+{
+  "skill_name": "claim-value",
+  "evals": [
+    {
+      "id": 51,
+      "name": "under-valued-after-mysc",
+      "prompt": "Amazon paid me $6.10 each for lost coffee scales (KW-SCALE-DGT). My cost is $7.90 a unit! Were these reimbursements under-valued? I did put my cost into Manage Your Sourcing Cost at some point.",
+      "expected_output": "Reimbursements, KW-SCALE-DGT: 2480000412 2025-02-11 Lost_Warehouse 2 at 19.84; 2480000655 2025-05-06 Lost_Warehouse 3 at 6.10; 2480000893 2026-02-17 Damaged_Warehouse 1 at 6.10; 2481000140 2026-09-08 Lost_Warehouse 2 at 7.90; 2481000152 2026-09-22 CustomerReturn 1 at 24.78. notes/costs.md: cost 7.90, entered in MYSC 2026-05-28, approved 2026-06-02. The 2025-02-11 line is before the 2025-03-31 move to sourcing cost (VR1, VR2). The two 6.10 lines are after the move and before the cost was approved: Amazon's estimate (VR5); an approved cost applies to reimbursements issued after approval and does not revalue earlier ones (VR8, VR23), and each line is compared with the cost in force at its approval-date (VR32). The 2026-09-08 line equals the entered 7.90. The CustomerReturn line is valued on the order basis, not on cost (VR27, VR31). The report names no basis (VR30). Below the seller's cost on the two estimate lines: 4 units x 1.80 = 7.20. A value dispute is the seller's step (Get Help workflow or a case, VR21) within a window counted from the reimbursement, read on the policy page or the store's redline (VR20).",
+      "files": [],
+      "expectations": [
+        "The answer reads the US Reimbursements report in this run and lists the KW-SCALE-DGT lines with dates, reasons and amount-per-unit.",
+        "The answer places the 6.10 lines (2025-05-06 and 2026-02-17) after Amazon's 2025-03-31 change and before the seller's cost was approved (2026-06-02, from notes/costs.md), and says an approved cost applies only to reimbursements issued after its approval.",
+        "The answer says the 2026-09-08 line at 7.90 matches the entered cost, and that the 2025-02-11 line at 19.84 predates the sourcing-cost rule.",
+        "The answer does not compare the CustomerReturn line (24.78) with the unit cost: it says that line is valued on the order basis.",
+        "The answer gives the shortfall against the seller's cost on the estimate lines (4 units x 1.80 = 7.20 USD) or the per-line differences, and states that a valuation dispute has a window counted from each reimbursement, attributing any length to the dated policy text or saying where it is read.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    },
+    {
+      "id": 52,
+      "name": "uk-reversal",
+      "prompt": "UK store: £23.20 was taken back from me as a 'reimbursement reversal'. What was it for, and did my units actually come back into stock?",
+      "expected_output": "Reimbursements (UK): 2590000140 on 2026-10-27, reason Reimbursement_Reversal, KW-KETTLE-BLK-UK, -23.20 GBP, cash -2, original-reimbursement-id 2590000052, original-reimbursement-type Lost_Warehouse. The original 2590000052 on 2026-05-19 paid 2 units at 11.60 = 23.20 GBP, no case-id, for the ledger's 05-12 M -2 at QQL1 (KL0512A1). The ledger shows one unit found: 10-22 F +1 at QQL2 (another FC, FC26). So two units were reversed against one found: one unit is not matched by a ledger find (VR36, VR40). listTransactions UK carries the reversal posted 2026-10-27 (REVERSAL_REIMBURSEMENT). Amazon's policy allows a reversal for an error or a unit found and returned, and states no time limit and no rule for the amount (VR36); staff send a seller who doubts one to the ledger and to Seller Support (VR37); whether to raise it is the seller's.",
+      "files": [],
+      "expectations": [
+        "The answer reads the UK Reimbursements report through the EU origin and ties the reversal 2590000140 to 2590000052 by original-reimbursement-id.",
+        "The answer gives the original: 2 units, Lost_Warehouse, 11.60 GBP each, 23.20 in all, 2026-05-19.",
+        "The answer reads the UK ledger detail and says only 1 unit was found (2026-10-22, QQL2) against the 2 reversed, so 1 reversed unit has no matching find in the ledger.",
+        "The answer says Amazon's policy names error or a found-and-returned unit as the grounds for a reversal and publishes no time limit or amount rule for it, and that raising the mismatch is the seller's step with Seller Support.",
+        "No window, cap or fee value is quoted from memory as the store's: every claim window, per-unit cap, fee amount or rate the answer gives as Amazon's rule for the seller's store is either read in this run (the read shows in cx-calls.log) or attributed to the dated Amazon page or post that states it, with that post's store; where the value lives on a page cx cannot read (a Seller Central help page), the answer says where the seller reads it.",
+        "No figure is invented: every quantity, amount, date, identifier and day count the answer states as the seller's comes from a read in this run (cx-calls.log), from tenant/notes or tenant/raw, or is arithmetic on those.",
+        "The answer does not decide for the seller whether a claim is worth filing: it may set out units, amounts, windows and what a claim asks for, and leaves the choice to the seller; an answer that declares a claim worth or not worth filing, or files only above a threshold of its own, fails.",
+        "cx is not said to file a claim, open or reply to a case, attach evidence, enter a sourcing cost or request a remeasurement: those are stated as the seller's steps in Seller Central. cx-calls.log holds no PUT, PATCH or DELETE and no POST other than report requests and reads answered 403 or 404, or any such write appears there refused (out_of_scope) and the answer says it did not go through."
+      ]
+    }
+  ]
+}
