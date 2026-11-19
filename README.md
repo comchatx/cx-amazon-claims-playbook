@@ -6,9 +6,6 @@ Some things you can ask:
 - Does Amazon pay for units lost in its warehouse without a claim?
 - Can filing many claims put my account at risk?
 
-To read stock states and money lines in depth, also install [Amazon Stock Playbook](https://www.npmjs.com/package/@comchatx/cx-amazon-stock-playbook) and [Amazon Finance Playbook](https://www.npmjs.com/package/@comchatx/cx-amazon-finance-playbook).
-
 ## What it uses
 
-- **Amazon SP-API:** your Amazon selling account, connected on the Amazon SP-API plugin. cx reads your inventory ledger, reimbursements, returns, removals, shipments and fees there.
-- **Amazon Seller Profile:** tells cx you sell on Amazon.
+- **Your Amazon seller account:** cx reads your inventory ledger, reimbursements, returns, removals, shipments and fees there.
