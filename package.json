@@ -1,6 +1,6 @@
 {
   "name": "@comchatx/cx-amazon-claims-playbook",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Checks what Amazon may owe you, and says where to claim.",
   "license": "MIT",
   "author": "ComChatX",
@@ -41,19 +41,19 @@
     },
     "prompts": {
       "claims-audit": {
-        "zh": "查一遍亚马逊可能该赔的货和钱，以及各自去哪索赔。"
+        "zh": "查一遍亚马逊可能该赔我的货和钱：哪些已经赔了，没赔的去哪里索赔。"
       },
       "shipment-claims": {
-        "zh": "查最近几批入库有没有少收，差多少、要什么证据。"
+        "zh": "查我最近几批入库有没有少收：差多少，现在能不能索赔，要交什么证据。"
       },
       "return-claims": {
-        "zh": "找出退款了但没退回、或退回不对的订单。"
+        "zh": "找出已经退款、货却没退回或退回不对的订单，看亚马逊赔了没有。"
       },
       "fee-claims": {
-        "zh": "查 FBA 费用有没有按错尺寸、重量或类目收。"
+        "zh": "查亚马逊有没有按错尺寸、重量或类目收费，哪些费用还能申诉。"
       },
       "claim-value": {
-        "zh": "看亚马逊的赔偿按什么价算、有没有被撤回的。"
+        "zh": "看亚马逊给我的赔偿各按什么价算，哪些比我的成本低，哪些后来又撤回了。"
       }
     },
     "builds": [
