@@ -68,11 +68,16 @@ it("each template's English description, Chinese words and seller's message are 
   }
 });
 
-it("the Plugins page's field gives every skill its drafted words in both languages, and builds on the door and the seller profile, naming the two playbooks it points to as optional", () => {
+it("the Plugins page's field gives every skill its drafted words in both languages, and builds on the door, naming the Amazon base and the two playbooks as optional, each with its reason", () => {
   const { comchatx } = field();
   expect(Object.keys(comchatx.skills).sort()).toEqual(Object.keys(SKILL_WORDS).sort());
   for (const [name, words] of Object.entries(SKILL_WORDS)) expect(comchatx.skills[name], name).toEqual(words);
-  expect(comchatx.builds).toEqual([{ on: "cx-amazon-sp-api", need: "required" }, { on: "cx-amazon-seller", need: "required" }, { on: "@comchatx/cx-amazon-stock-playbook", need: "optional" }, { on: "@comchatx/cx-amazon-finance-playbook", need: "optional" }]);
+  expect(comchatx.builds).toEqual([
+    { on: "cx-amazon-sp-api", need: "required" },
+    { on: "cx-amazon-seller", need: "optional", why: { en: "Tells cx from the start that you sell on Amazon.", zh: "用于让 cx 从第一条消息起就知道你在亚马逊开店。" } },
+    { on: "@comchatx/cx-amazon-stock-playbook", need: "optional", why: { en: "Shows stock costs and when to restock.", zh: "用于看清库存压着要花多少钱、什么时候该补货。" } },
+    { on: "@comchatx/cx-amazon-finance-playbook", need: "optional", why: { en: "Works out what each product earns after fees.", zh: "用于算出每个商品扣掉费用后赚了多少。" } },
+  ]);
 });
 
 it("each README is the drafted Overview, whole", () => {
