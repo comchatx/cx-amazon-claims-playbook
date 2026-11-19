@@ -3,6 +3,7 @@
 ## 0.1.4
 
 - The five templates' Try it sentences say both halves of what each asks, in Chinese (`comchatx.prompts`) and English (each template's `description`).
+- The `/claims-audit` template also asks where to claim what Amazon has not paid.
 
 ## 0.1.3
 
