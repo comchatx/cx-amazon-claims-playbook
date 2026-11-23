@@ -95,8 +95,8 @@ const lines = markdown(join(ROOT, "skills")).flatMap((file) =>
     .map((line) => ({ file: file.slice(ROOT.length + 1), line, ids: [...line.matchAll(GROUP)].flatMap((group) => group[1]!.match(ID) ?? []) })),
 );
 
-it("the research numbers 423 positions, 30 withdrawn, and README § 11's held rows agree with the files", () => {
-  expect(all).toHaveLength(423);
+it("the research numbers 424 positions, 30 withdrawn, and README § 11's held rows agree with the files", () => {
+  expect(all).toHaveLength(424);
   expect(all.filter((position) => position.withdrawn)).toHaveLength(30);
   expect(HELD).toEqual(["RT10", "RT12", "RT14", "RT15", "RT22", "RT23", "RT25", "RT26", "RT27", "RT28", "RT42", "RT45", "FC56"]);
   expect(PARTLY_HELD).toEqual(["RT3", "RT6", "RT8", "RT16", "RT19", "RT21", "RT36", "RT37", "FL4"]);
@@ -105,7 +105,7 @@ it("the research numbers 423 positions, 30 withdrawn, and README § 11's held ro
   for (const id of HELD) expect(position(id)?.withdrawn, id).toBe(true);
   for (const id of [...PARTLY_HELD, ...CLAUSE_HELD]) expect(position(id)?.withdrawn, id).toBe(false);
   for (const id of CLAUSE_HELD) expect(position(id)?.text, id).toContain("[held");
-  expect(standing.size).toBe(423 - 30 - PARTLY_HELD.length);
+  expect(standing.size).toBe(424 - 30 - PARTLY_HELD.length);
 });
 
 it("every line of the skills and their references cites a standing position, except a line that only points", () => {

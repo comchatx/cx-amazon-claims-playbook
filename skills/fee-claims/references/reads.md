@@ -3,7 +3,7 @@
 ## The measurement Amazon used
 
 - `GET_FBA_ESTIMATED_FBA_FEES_TXT_DATA` carries Amazon's dimensions and weight per SKU, `product-size-tier` in the US only and `product-size-weight-band` in the EU; it is a current snapshot (FE17).
-- Its refresh interval and request limit are on the report's own entry in *FBA Reports* (SU20).
+- Its entry on *FBA Reports* states that it is refreshed at least once every 72 hours, is asked with `dataStartTime` at least 72 hours before now and `dataEndTime` now, and can be requested once per day per seller (read 2026-11-23) (SU20).
 - `GET_FBA_STORAGE_FEE_CHARGES_DATA` carries dimensions, weight, `item_volume` and `product_size_tier` per FNSKU, FC and `month_of_charge`; both reports answer to Pricing or Amazon Fulfillment (FE17).
 - Amazon keeps no history in the Fee Preview, and Velocity Sellers holds that Amazon sends no notice of a remeasure; so on the five roles a tier change is dated only by comparing dated copies of the report the reader kept (FE19).
 - `getMyFeesEstimateForSKU` uses Amazon's measured dimensions once units are received and `getMyFeesEstimateForASIN` the catalogue size; the research reads a different fulfilment fee between them at one price as a sign the two differ (FE21).
