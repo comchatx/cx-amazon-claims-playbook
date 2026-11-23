@@ -1,6 +1,6 @@
 {
   "name": "@comchatx/cx-amazon-claims-playbook",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Checks what Amazon may owe you, and says where to claim.",
   "license": "MIT",
   "author": "ComChatX",

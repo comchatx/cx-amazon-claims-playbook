@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.1.5
 
+- Each of the five templates' body is its Try it sentence in English, its own `description` word for word, followed by the seller's words (`$@`): typing `/claims-audit` asks cx the sentence the row shows, not a longer body.
 - The skills state four facts from Amazon's *FBA Reports* page, each beside its place and the day it was read (2026-11-23): how often Amazon generates a near-real-time and a daily FBA report, and that a report already made within that period holds the newest content, with which reports the page marks daily or near real-time (new position SU61); the FBA returns and reimbursements reports' columns as Amazon documents them; and the fee preview's refresh, start offset and request limit.
-- The five templates and their Try it sentences are unchanged.
+- The Try it sentences themselves are unchanged.
 
 ## 0.1.4
 
