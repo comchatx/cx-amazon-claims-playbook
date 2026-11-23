@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- The tile's mark on the Plugins page is the signed drawing.
+
 ## 0.1.5
 
 - Each of the five templates' body is its Try it sentence in English, its own `description` word for word, followed by the seller's words (`$@`): typing `/claims-audit` asks cx the sentence the row shows, not a longer body.
