@@ -82,7 +82,7 @@
 
 ## 读报告
 
-**VR30** `GET_FBA_REIMBURSEMENTS_DATA` 没有估值依据、当时生效成本、上限或店铺的列。要找出低估的行，只能拿 `amount-per-unit` 与别处读到的依据比较：MYSC（Seller Central）、卖家自己的成本，或订单依据（VR27）。来源：亚马逊 *Report Type Values – FBA* 页面（18 列，2026-11-13 读取）；P-ref-19；VR18。[根据官方列推断]
+**VR30** `GET_FBA_REIMBURSEMENTS_DATA` 在 *FBA Reports* 上列出十八列：`approval-date`、`reimbursement-id`、`case-id`、`amazon-order-id`、`reason`、`sku`、`fnsku`、`asin`、`product-name`、`condition`、`currency-unit`、`amount-per-unit`、`amount-total`、`quantity-reimbursed-cash`、`quantity-reimbursed-inventory`、`quantity-reimbursed-total`、`original-reimbursement-id`、`original-reimbursement-type`（2026-11-23 读取），没有估值依据、当时生效成本、上限或店铺的列。要找出低估的行，只能拿 `amount-per-unit` 与别处读到的依据比较：MYSC（Seller Central）、卖家自己的成本，或订单依据（VR27）。来源：亚马逊 *Report Type Values – FBA* 页面（18 列，2026-11-13 读取）；P-ref-19；VR18。[根据官方列推断]
 
 **VR31** 一行应采用的依据取决于其 reason 类别。仓库、入库和移除类 reason 用 sourcing cost；客户退货和客服类 reason 用订单依据（VR27）。这一归类来自政策的两个标题和 P-ref-35 的 reason 值。`Lost_Outbound` / `Damaged_Outbound` 归哪边未读到；该索赔类型归 customer-returns。[推断] 这种分组是本席位自己的读法，不是发现（见 *Seat's own*）。
 

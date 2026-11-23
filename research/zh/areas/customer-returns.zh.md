@@ -108,7 +108,7 @@ SP-API 列出了补发报告的列名，包括 `replacement-reason-code`、`repl
 退货报告里的 `return-date` 是"Date returned merchandise was processed at the fulfillment center"（退货在运营中心处理的日期），不是退款日；索赔时钟从退款日或补发日起算。来源：G200453320 v16（listing pack 的读取）；News 81c3235d [官方文档]。
 
 **RT34**
-退货报告的列名因来源而异：SP-API 页面上是 `order-id` 和 `license-plate-number`；listing pack 读到的帮助页和 Openbridge 的副本是 `lpn`，Openbridge 还写作 `amazon-order-id`。cx 读取卖家文件的表头。来源：FBA Reports；G200453320（listing pack 的读取）[官方文档]；Openbridge [从业者观点]。
+退货报告的列名因来源而异：SP-API 页面列出的是 `return-date`、`order-id`、`sku`、`asin`、`fnsku`、`product-name`、`quantity`、`fulfillment-center-id`、`detailed-disposition`、`reason`、`status`、`license-plate-number`、`customer-comments`（2026-11-23 读取）；listing pack 读到的帮助页和 Openbridge 的副本是 `lpn`，Openbridge 还写作 `amazon-order-id`。cx 读取卖家文件的表头。来源：FBA Reports；G200453320（listing pack 的读取）[官方文档]；Openbridge [从业者观点]。
 （"读卖家文件表头"是本席位自己的做法，无来源，不进入任何技能；列名不一致本身才是有来源的事实。）
 
 **RT35**

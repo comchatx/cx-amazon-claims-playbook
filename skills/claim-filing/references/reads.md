@@ -39,7 +39,9 @@
 
 ## Lag
 
-- Amazon sets a minimum interval between generations of an FBA report, one for near-real-time and one for daily reports, in the opening of *FBA Reports*; practitioners report it counts per seller and report type across applications (SU19).
+- Amazon generates a near-real-time FBA report no more than once every 30 minutes and a daily one no more than once every four hours, as the opening of *FBA Reports* states (read 2026-11-23); practitioners report it counts per seller and report type across applications (SU19).
+- After a report is generated, Amazon generates no updated version of it until that waiting period passes, so within it a report already made holds the newest content Amazon has; `getReports` with `reportTypes` lists the reports already made, and the page does not say what a new request returns within the period (SU61).
+- On *FBA Reports* the reimbursements, FBA returns and replacements entries read "Content updated daily", the two removal entries "Content updated in near real-time", and the ledger detail's entry states neither (read 2026-11-23) (SU61).
 - The fee preview's refresh interval, `dataStartTime` offset and per-seller request limit are on its *FBA Reports* entry (SU20).
 - The Amazon-fulfilled shipments report's span per request, request cap (Seller Central requests count) and delay after shipping are on its *FBA Reports* entry (SU21).
 - The long-term storage fee report's required span is on its *FBA Reports* entry (SU22).

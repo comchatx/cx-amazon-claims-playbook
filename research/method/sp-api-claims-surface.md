@@ -404,6 +404,7 @@ Additions since 2025 that a claims audit can use: Finances `listTransactions` fi
 - **SU58.** Liquidation proceeds post as Finances v0 `FBALiquidationEventList` under `listFinancialEvents`; no report type read carries liquidation proceeds per removal order. Source: `financesV0.json`; *FBA Reports*. [command-verified] (Removals-disposals owns what is owed on liquidation.)
 - **SU59.** The stranded and reserved inventory reports name Pricing or Amazon Fulfillment, are request-only and are "updated in near real-time". The stranded report carries `date-stranded`, `stranded-reason` and `Date-to-take-auto-removal`. Source: *FBA Reports*. [read in official docs] (Stock pack `stuck-stock/references/stranded.md` owns stranding.)
 - **SU60.** Selling Partner Support (Restricted) is requested for an application apart from its other roles: a developer asked Amazon in 2026-10 how to add it to an approved application without disturbing its other roles. No Amazon answer was posted. Source: issue #5422. [opinion] (SU46 holds Amazon's requirement for restricted roles.)
+- **SU61.** After an FBA report is generated, Amazon generates no updated version of it until its waiting period passes (SU19), so within that period a report already made holds the newest content Amazon has; `getReports` (`GET /reports/2021-06-30/reports`, `reportTypes`) lists reports already made. *FBA Reports* does not say what a new request returns within the period. Its entries read "Content updated daily" for the reimbursements, FBA returns and replacements reports and "Content updated in near real-time" for the removal order and removal shipment detail reports; the ledger detail's entry states neither. Source: *FBA Reports*, opening and entries (2026-10-13, read 2026-11-23); `reports_2021-06-30.json`. [read in official docs] That the report already made holds the newest content is [inferred] from the opening's sentence.
 
 No position here is a sequence, a threshold, a rule of when to ask the seller, or a ceiling on what cx reads.
 
@@ -434,8 +435,8 @@ Each value is Amazon's as read, or a vendor's where marked, with its store and d
 | Value | As read | Marketplace | Date read | Source | Position |
 |---|---|---|---|---|---|
 | Ledger detail look-back | "for 18 months" | none named | 2026-11-13 | *FBA Reports* (2026-10-13), ledger detail | SU15 |
-| FBA report generation interval | near real-time: 30 minutes; daily: four hours | none named | 2026-11-13 | *FBA Reports*, opening | SU19 |
-| Fee preview refresh, start offset, request limit | "at least once every 72 hours"; `dataStartTime` "a minimum 72 hours prior to NOW"; "once per day per seller" | none named | 2026-11-13 | *FBA Reports*, fee preview | SU20 |
+| FBA report generation interval | near real-time: 30 minutes; daily: four hours | none named | 2026-11-13; 2026-11-23 | *FBA Reports*, opening | SU19 |
+| Fee preview refresh, start offset, request limit | "at least once every 72 hours"; `dataStartTime` "a minimum 72 hours prior to NOW"; "once per day per seller" | none named | 2026-11-13; 2026-11-23 | *FBA Reports*, fee preview | SU20 |
 | Fee preview size-tier and future-fee columns | `product-size-tier`, `estimated-future-order-handling-fee-per-order`, `expected-future-fulfillment-fee-per-unit`: "US store only" | US | 2026-11-13 | *FBA Reports*, fee preview | SU20 |
 | Amazon-fulfilled shipments: span, cap, delay | one month per request; 12 requests every 8 hours per selling partner account; 1–3 hours, rarely 24 | the delay sentence names JP, EU, NA | 2026-11-13 | *FBA Reports* | SU21 |
 | Long-term storage request span | "should be equal to one month" | none named | 2026-11-13 | *FBA Reports* | SU22 |
@@ -633,3 +634,9 @@ After the completeness critic's first round. Routes: plain GET of developer-docs
 **Withdrawn.** None.
 
 **Not changed, by the ruling.** G200732720, G200453320, G200213130, GJQTPXHTS6K5PQFD, GQNVDV46U9JQ25HY and GZ8Y22NL2FSRY8M5 stay unread. The customer-returns file's readings of the first three came through the help hub's content call, which the office closed on 2026-11-10, and this file takes nothing from them.
+
+## Revision (2026-11-23)
+
+- *FBA Reports* re-read verbatim at `https://developer-docs.amazon/sp-api/docs/report-type-values-fba`, where the `.com` address now redirects (page updated 2026-10-13): the opening's two generation limits, and the fee preview, reimbursements, FBA returns, replacements, removal and ledger detail entries.
+- Added SU61: a report already made within its waiting period, `getReports`, and which entries read "Content updated daily" or "in near real-time".
+- The skills now carry the two generation limits (SU19) and the fee preview's refresh, start offset and request limit (SU20) beside their place and the day read; the *Values that move* rows for both gain the re-read date.

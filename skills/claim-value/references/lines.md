@@ -3,6 +3,7 @@
 ## What the line carries
 
 - `GET_FBA_REIMBURSEMENTS_DATA` answers to Pricing or Amazon Fulfillment (SU3).
+- *FBA Reports* lists its eighteen columns as `approval-date`, `reimbursement-id`, `case-id`, `amazon-order-id`, `reason`, `sku`, `fnsku`, `asin`, `product-name`, `condition`, `currency-unit`, `amount-per-unit`, `amount-total`, `quantity-reimbursed-cash`, `quantity-reimbursed-inventory`, `quantity-reimbursed-total`, `original-reimbursement-id` and `original-reimbursement-type` (read 2026-11-23); this is Amazon's documented list, not yet seen in a live file (VR30).
 - It carries no column for the valuation basis, the cost in force, the cap or the store (VR30).
 - From those columns it follows that whether a line is low shows only beside a basis read elsewhere: MYSC in Seller Central, the seller's own cost, or the order's basis; this is inferred, not Amazon's statement (VR30).
 - The report's columns and how a line posts to money: @comchatx/cx-amazon-finance-playbook, its refunds-and-reimbursements skill.

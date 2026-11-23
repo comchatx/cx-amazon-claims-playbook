@@ -121,3 +121,5 @@
 **SU59** stranded 和 reserved 库存报告列 Pricing 或 Amazon Fulfillment，只能单次请求，"updated in near real-time"。stranded 报告带 `date-stranded`、`stranded-reason` 和 `Date-to-take-auto-removal`。来源：*FBA Reports*。[官方文档]（stranded 由 stock pack `stuck-stock/references/stranded.md` 负责。）
 
 **SU60** Selling Partner Support (Restricted) 是为应用单独申请的，和应用的其他角色分开：2026-10 有一位开发者问 Amazon，怎样把它加到已批准的应用上而不影响其他角色。Amazon 没有回复。来源：issue #5422。[从业者观点]（受限角色的要求见 SU46。）
+
+**SU61** FBA 报告生成一次后，等待期过完之前 Amazon 不会生成更新的版本（SU19），所以在等待期内，已经生成的那份报告就是 Amazon 手上最新的内容；`getReports`（`GET /reports/2021-06-30/reports`，`reportTypes`）列出已经生成的报告。*FBA Reports* 没说等待期内再请求会得到什么。各条目写的是：赔偿、FBA 退货和补发报告「Content updated daily」，两份移除报告「Content updated in near real-time」，库存流水明细的条目两样都没写。来源：*FBA Reports* 开头和各条目（2026-10-13 版，2026-11-23 读取）；`reports_2021-06-30.json`。[官方文档]「已经生成的那份就是最新内容」是由开头那句[推断]。
